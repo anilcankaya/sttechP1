@@ -1,16 +1,11 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<Urun>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Basarili</title>
-</head>
-<body>
+    <h3>Eklenmiş Ürünler</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Ad @item.Fiyat</li>
+        }
+    </ul>
     <p>İşlem Başarılı....</p>
-</body>
-</html>

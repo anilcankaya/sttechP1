@@ -29,8 +29,9 @@ namespace introDotnetCore.Controllers
             if (ModelState.IsValid)
             {
                 //koleksiyona ekle....
+                UrunKoleksiyonu.UrunEkle(urun);
 
-                return View("Basarili");
+                return View("Basarili",UrunKoleksiyonu.UrunleriGetir());
             }
             return View();
         }

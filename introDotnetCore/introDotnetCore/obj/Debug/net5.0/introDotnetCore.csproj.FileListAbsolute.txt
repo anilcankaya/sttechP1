@@ -111,3 +111,5 @@ C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDot
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Home\UrunEkle.cshtml.g.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Home\Basarili.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
