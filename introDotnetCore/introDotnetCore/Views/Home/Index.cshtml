@@ -1,4 +1,6 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     Layout = null;
 }
@@ -24,6 +26,6 @@
             <span>İyi Günler</span>
         }
     </p>
-
+    <a asp-action="UrunEkle" asp-controller="Home" >ürün ekle</a>
 </body>
 </html>
