@@ -1,4 +1,4 @@
-﻿
+﻿@model Urun
 @{
     Layout = null;
 }
@@ -11,5 +11,22 @@
     <title>UrunEkle</title>
 </head>
 <body>
+    <form method="post">
+        <p>
+            <input placeholder="Ürün adı" asp-for="Ad" />
+            <span asp-validation-for="Ad"></span>
+        </p>
+        <p>
+            <input asp-for="Fiyat" />
+            <span asp-validation-for="Fiyat"></span>
+        </p>
+        <p>
+            <input asp-for="Aciklama" />
+            <span asp-validation-for="Aciklama"></span>
+        </p>
+       
+        <button type="submit">Ekle</button>
+        
+    </form>
 </body>
 </html>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using introDotnetCore.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,24 @@ namespace introDotnetCore.Controllers
             ViewBag.Saat = DateTime.Now.Hour;
             return View();
         }
-
+        [HttpGet]
         public IActionResult UrunEkle()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult UrunEkle(Urun urun)
+        {
+            if (ModelState.IsValid)
+            {
+                //koleksiyona ekle....
+
+                return View("Basarili");
+            }
+            return View();
+        }
+
+
     }
 }

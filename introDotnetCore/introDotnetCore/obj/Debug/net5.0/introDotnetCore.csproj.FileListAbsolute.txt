@@ -108,3 +108,6 @@ C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDot
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\introDotnetCore.RazorTargetAssemblyInfo.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\introDotnetCore.Views.pdb
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Home\UrunEkle.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\introDotnetCore\introDotnetCore\obj\Debug\net5.0\Razor\Views\Home\Basarili.cshtml.g.cs
