@@ -57,6 +57,13 @@ namespace shop
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                   name: "paging",
+                   pattern: "Sayfa/{page}",
+                   defaults: new { controller = "Home", action = "Index", page = 1 });
+
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

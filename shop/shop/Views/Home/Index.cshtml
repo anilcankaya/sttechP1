@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Home Page";
+
+
 }
 
-<p>
-    @ViewBag.Value
-</p>
+
 <div class="row">
     @foreach (var product in Model)
     {
@@ -21,8 +21,23 @@
         </div>
     }
 
-    
-    
+
+
 
 </div>
 
+<div class="row">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(ViewBag.Page==@i ? "active":"")">  <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
+
+            }
+
+
+        </ul>
+    </nav>
+
+</div>

@@ -23,11 +23,30 @@ namespace shop.Controllers
       
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
             //var service = new FakeProductServices();
+            //ViewBag.Value = productService.GetGuid().ToString();
             var products = productService.GetProducts();
-            ViewBag.Value = productService.GetGuid().ToString();
+            
+            /*
+             * page 1 ise 0 eleman atla 4 eleman getir
+             *      2     4             4
+             *      3     8             4
+             *      4     12            4
+             */        
+
+            var itemsPerPage = 4;
+            ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / itemsPerPage);
+            ViewBag.Page = page;
+
+            products = products.OrderBy(x => x.Id)
+                               .Skip((page - 1) * itemsPerPage)
+                               .Take(itemsPerPage)
+                               .ToList();
+
+
+          
             return View(products);
         }
         [HttpGet]
