@@ -1,9 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using shop.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace shop
 {
-    public class Startup
+    public class Startup 
     {
         public Startup(IConfiguration configuration)
         {
@@ -24,6 +25,14 @@ namespace shop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //geçici: her request'de ve her kullanıldığına yeni bir instance alınacak.
+
+            //IoC
+            services.AddTransient<IProductService, FakeProductServices>();
+            //scoped: her request'de yeni instance, fakat tüm projede (ne kadar kullanılırsa) aynı instance.
+            //services.AddScoped();
+            //tek: yalnızca bir instance yetiyorsa:
+            //services.AddSingleton();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
