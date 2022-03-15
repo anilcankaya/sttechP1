@@ -5,6 +5,7 @@ using shop.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace shop.Controllers
@@ -19,7 +20,8 @@ namespace shop.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var collection = getCollectionFromSession();
+            return View(collection);
         }
         
         public IActionResult AddProductToCart(int id)
@@ -28,9 +30,33 @@ namespace shop.Controllers
             Product product = productService.GetProductById(id);
             if (product!=null)
             {
-
+                ShoppingCartCollection cartCollection = getCollectionFromSession();
+                cartCollection.AddProduct(product, 1);
+                saveToSession(cartCollection);
             }
-            return Json("Tamam");
+            return Json(product.Name + " sepete eklendi");
+        }
+
+        private void saveToSession(ShoppingCartCollection cartCollection)
+        {
+           string serialized =  JsonSerializer.Serialize(cartCollection);
+            HttpContext.Session.SetString("cart", serialized);
+
+
+        }
+
+        private ShoppingCartCollection getCollectionFromSession()
+        {
+            ShoppingCartCollection shoppingCart = null;
+            if (HttpContext.Session.GetString("cart")==null)
+            {
+                shoppingCart = new ShoppingCartCollection();
+                HttpContext.Session.SetString("cart", JsonSerializer.Serialize(shoppingCart)); 
+            }
+            string serialized = HttpContext.Session.GetString("cart");
+            var shopping = JsonSerializer.Deserialize<ShoppingCartCollection>(serialized);
+            return shopping;
+
         }
     }
 }
