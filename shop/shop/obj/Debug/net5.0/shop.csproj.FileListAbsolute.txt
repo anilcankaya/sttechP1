@@ -39,3 +39,4 @@ C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\sho
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\shop.csproj.CopyComplete
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\shop.csproj.AssemblyReference.cache
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Shared\_ProductCart.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Shared\Components\Menu\Default.cshtml.g.cs

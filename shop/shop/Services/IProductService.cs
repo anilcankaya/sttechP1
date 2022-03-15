@@ -10,5 +10,6 @@ namespace shop.Services
     {
         List<Product> GetProducts();
         Guid GetGuid();
+        Product GetProductById(int id);
     }
 }

@@ -26,9 +26,10 @@ namespace shop
         {
             services.AddControllersWithViews();
             //geçici: her request'de ve her kullanıldığına yeni bir instance alınacak.
-
+            services.AddSession();
             //IoC
             services.AddTransient<IProductService, FakeProductServices>();
+            services.AddScoped<ICategoryService, FakeCategoryService>();
             //scoped: her request'de yeni instance, fakat tüm projede (ne kadar kullanılırsa) aynı instance.
             //services.AddScoped();
             //tek: yalnızca bir instance yetiyorsa:
@@ -50,7 +51,7 @@ namespace shop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
