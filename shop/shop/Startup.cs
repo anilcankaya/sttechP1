@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace shop
 {
-    public class Startup 
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -31,7 +31,7 @@ namespace shop
             services.AddSession();
             //IoC
             services.AddTransient<IProductService, EFProductService>();
-            services.AddScoped<ICategoryService, FakeCategoryService>();
+            services.AddScoped<ICategoryService, EFCategoryService>();
             //scoped: her request'de yeni instance, fakat tüm projede (ne kadar kullanılırsa) aynı instance.
             //services.AddScoped();
             //tek: yalnızca bir instance yetiyorsa:
@@ -63,6 +63,15 @@ namespace shop
             app.UseEndpoints(endpoints =>
             {
 
+                //endpoints.MapAreaControllerRoute(
+                //    name: "MyAreaServices",
+                //    areaName: "StoreArea",
+                //    pattern: "StoreArea/{controller=Store}/{action=Index}/{id?}");
+
+               endpoints.MapControllerRoute(
+               name: "areaRoute",
+               pattern: "{area:exists}/{controller=Store}/{action=Index}");
+
                 endpoints.MapControllerRoute(
                    name: "paging",
                    pattern: "Sayfa/{page}",
@@ -72,6 +81,12 @@ namespace shop
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+               
+
+
+
+
             });
         }
     }

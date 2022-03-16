@@ -25,6 +25,7 @@ namespace shop.Models
         public string ImageUrl { get; set; }
         public int? Stock { get; set; }
         //[ForeignKey("Category")]
+        [Display(Name="Kategorisi")]
         public int CategoryId { get; set; }
 
         //navigation property

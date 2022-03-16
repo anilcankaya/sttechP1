@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shop.Services
 {
-    public class FakeProductServices : IProductService
+    public class FakeProductServices //: IProductService
     {
         private List<Product> products = new List<Product>();
         public FakeProductServices()
