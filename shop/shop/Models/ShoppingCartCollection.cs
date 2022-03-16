@@ -11,6 +11,7 @@ namespace shop.Models
         public List<ProductInCart> productsInCart { get; set; } = new List<ProductInCart>();
         public double GetTotalPrice()
         {
+            
             return productsInCart.Sum(p => p.Quantity * (p.Product.Price.Value * (1 - p.Product.Discount.Value)));
         }
 

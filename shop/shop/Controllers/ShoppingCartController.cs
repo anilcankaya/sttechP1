@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using shop.Extensions;
 using shop.Models;
 using shop.Services;
 using System;
@@ -23,12 +24,12 @@ namespace shop.Controllers
             var collection = getCollectionFromSession();
             return View(collection);
         }
-        
+
         public IActionResult AddProductToCart(int id)
         {
             //id'si eklenen ürünü, koleksiyona koleksiyonu da session'a ekle.
             Product product = productService.GetProductById(id);
-            if (product!=null)
+            if (product != null)
             {
                 ShoppingCartCollection cartCollection = getCollectionFromSession();
                 cartCollection.AddProduct(product, 1);
@@ -39,23 +40,30 @@ namespace shop.Controllers
 
         private void saveToSession(ShoppingCartCollection cartCollection)
         {
-           string serialized =  JsonSerializer.Serialize(cartCollection);
-            HttpContext.Session.SetString("cart", serialized);
-
+            //string serialized =  JsonSerializer.Serialize(cartCollection);
+            // HttpContext.Session.SetString("cart", serialized);
+            HttpContext.Session.SetJson("cart", cartCollection);
 
         }
 
         private ShoppingCartCollection getCollectionFromSession()
         {
-            ShoppingCartCollection shoppingCart = null;
-            if (HttpContext.Session.GetString("cart")==null)
-            {
-                shoppingCart = new ShoppingCartCollection();
-                HttpContext.Session.SetString("cart", JsonSerializer.Serialize(shoppingCart)); 
-            }
-            string serialized = HttpContext.Session.GetString("cart");
-            var shopping = JsonSerializer.Deserialize<ShoppingCartCollection>(serialized);
-            return shopping;
+            //ShoppingCartCollection shoppingCart = null;
+            //if (HttpContext.Session.GetString("cart")==null)
+            //{
+            //    shoppingCart = new ShoppingCartCollection();
+            //    HttpContext.Session.SetString("cart", JsonSerializer.Serialize(shoppingCart)); 
+            //}
+            //string serialized = HttpContext.Session.GetString("cart");
+            //var shopping = JsonSerializer.Deserialize<ShoppingCartCollection>(serialized);
+            //return shopping;
+
+            //Random random = new Random();
+            //string test =  random.NextWord("test", "deneme", "softtech");
+
+            ShoppingCartCollection shoppingCartCollection = HttpContext.Session.GetJson<ShoppingCartCollection>("cart") ?? 
+                                                            new ShoppingCartCollection();
+            return shoppingCartCollection;
 
         }
     }

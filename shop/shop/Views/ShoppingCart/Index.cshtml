@@ -3,32 +3,42 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Ürünleriniz</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Ürün Adı</th>
-            <th>Fiyatı</th>
-            <th>Adet</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.productsInCart)
-        {
-            <tr>
-                <td>
-                    @item.Product.Name
-                </td>
-                <td>@item.Product.Price</td>
-                <td>@item.Quantity</td>
-            </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3">Toplam Tutar: @Model.GetTotalPrice()</td>
-        </tr>
-    </tfoot>
-</table>
+@if (Model.productsInCart.Count == 0)
+{
+    <div class="alert alert-warning">
+        <p>Sepetinizde ürün bulunmamaktadır</p>
+    </div>
+}
+else
+{
 
+
+    <h1>Ürünleriniz</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Fiyatı</th>
+                <th>Adet</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.productsInCart)
+            {
+                <tr>
+                    <td>
+                        @item.Product.Name
+                    </td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Toplam Tutar: @Model.GetTotalPrice()</td>
+            </tr>
+        </tfoot>
+    </table>
+}
 
