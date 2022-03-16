@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using shop.Data;
 using shop.Services;
 using System;
 using System.Collections.Generic;
@@ -28,12 +30,14 @@ namespace shop
             //geçici: her request'de ve her kullanıldığına yeni bir instance alınacak.
             services.AddSession();
             //IoC
-            services.AddTransient<IProductService, FakeProductServices>();
+            services.AddTransient<IProductService, EFProductService>();
             services.AddScoped<ICategoryService, FakeCategoryService>();
             //scoped: her request'de yeni instance, fakat tüm projede (ne kadar kullanılırsa) aynı instance.
             //services.AddScoped();
             //tek: yalnızca bir instance yetiyorsa:
             //services.AddSingleton();
+            var connectionString = Configuration.GetConnectionString("shopDb");
+            services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

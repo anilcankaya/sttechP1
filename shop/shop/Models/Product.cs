@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,11 @@ namespace shop.Models
         public double? Discount { get; set; } = 0;
         public string ImageUrl { get; set; }
         public int? Stock { get; set; }
+        //[ForeignKey("Category")]
         public int CategoryId { get; set; }
+
+        //navigation property
+        public Category Category { get; set; }
 
 
 

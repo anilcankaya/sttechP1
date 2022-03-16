@@ -36,7 +36,7 @@ namespace shop.Controllers
              *      4     12            4
              */        
 
-            var itemsPerPage = 4;
+            var itemsPerPage = 8;
             ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / itemsPerPage);
             ViewBag.Page = page;
 
