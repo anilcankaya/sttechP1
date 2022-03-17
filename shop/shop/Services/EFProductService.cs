@@ -42,6 +42,7 @@ namespace shop.Services
 
         public void UpdateProduct(Product product)
         {
+            //shopDbContext.Entry<Product>(product).State = EntityState.Modified;
             shopDbContext.Products.Update(product);
             shopDbContext.SaveChanges();
         }

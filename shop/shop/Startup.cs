@@ -38,6 +38,8 @@ namespace shop
             //services.AddSingleton();
             var connectionString = Configuration.GetConnectionString("shopDb");
             services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connectionString));
+
+           // services.AddAuthentication()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

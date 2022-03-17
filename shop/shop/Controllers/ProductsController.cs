@@ -26,23 +26,13 @@ namespace shop.Controllers
             var products = productService.GetProducts();
             return View(products);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
-           
+
             List<SelectListItem> selectLists = getCategoriesForSelect();
-
             ViewBag.SelectList = selectLists;
-
             return View();
-        }
-
-        private  List<SelectListItem> getCategoriesForSelect()
-        {
-            var categories =categoryService.GetCategories().ToList();
-            List<SelectListItem> selectLists = new List<SelectListItem>();
-            categories.ForEach(ct => selectLists.Add(new SelectListItem { Text = ct.Name, Value = ct.Id.ToString() }));
-            return selectLists;
         }
 
         [HttpPost]
@@ -60,12 +50,30 @@ namespace shop.Controllers
 
         }
 
+        private List<SelectListItem> getCategoriesForSelect()
+        {
+            var categories = categoryService.GetCategories().ToList();
+            List<SelectListItem> selectLists = new List<SelectListItem>();
+            categories.ForEach(ct => selectLists.Add(new SelectListItem { Text = ct.Name, Value = ct.Id.ToString() }));
+            return selectLists;
+        }
+
+
+
         public IActionResult Update(int id)
         {
-          
+
             var product = productService.GetProductById(id);
-            ViewBag.SelectList = getCategoriesForSelect();
-            return View(product);
+            if (product != null)
+            {
+                ViewBag.SelectList = getCategoriesForSelect();
+                return View(product);
+            }
+
+            ModelState.AddModelError("notFound", $"{id} id'li ürün bulunamadı");
+            return View();
+
+
         }
 
 
@@ -78,6 +86,19 @@ namespace shop.Controllers
                 productService.UpdateProduct(product);
                 return RedirectToAction(nameof(Index));
             }
+            return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var product = productService.GetProductById(id);
+            return View(product);
+        }
+
+        [HttpPost()]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
             return View();
         }
     }
