@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace shop
             //IoC
             services.AddTransient<IProductService, EFProductService>();
             services.AddScoped<ICategoryService, EFCategoryService>();
+            services.AddScoped<IUserService, FakeUserService>();
             //scoped: her request'de yeni instance, fakat tüm projede (ne kadar kullanılırsa) aynı instance.
             //services.AddScoped();
             //tek: yalnızca bir instance yetiyorsa:
@@ -39,7 +41,14 @@ namespace shop
             var connectionString = Configuration.GetConnectionString("shopDb");
             services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connectionString));
 
-           // services.AddAuthentication()
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(opt =>
+                    {
+                        opt.LoginPath = "/Users/Login";
+                        opt.AccessDeniedPath = "/Users/AccessDenied";
+                        
+                    });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +69,7 @@ namespace shop
             app.UseSession();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

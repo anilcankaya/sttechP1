@@ -152,3 +152,6 @@ C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\sho
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Products\Index.cshtml.g.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Products\Create.cshtml.g.cs
 C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Products\Update.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Products\Delete.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Users\Login.cshtml.g.cs
+C:\Users\turka\source\repos\Kurumsal\Softtech\Temel ASP.NET Core\Part I\shop\shop\obj\Debug\net5.0\Razor\Views\Users\AccessDenied.cshtml.g.cs

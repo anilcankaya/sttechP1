@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace shop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Editor")]
     public class ProductsController : Controller
     {
         private IProductService productService;
