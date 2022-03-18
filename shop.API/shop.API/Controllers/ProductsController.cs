@@ -53,18 +53,27 @@ namespace shop.API.Controllers
 
             if (ModelState.IsValid)
             {
-                var product = mapper.Map<Product>(request);
-                productService.Add(product);
-                return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+                //var product = mapper.Map<Product>(request);
+               int lastId = productService.Add(request);
+                return CreatedAtAction(nameof(GetById), new { id = lastId }, null);
             }
             return BadRequest(ModelState);          
 
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Product product)
+        public IActionResult Update(int id, UpdateProductRequest request)
         {
             // TODO 1: Any ile ürün var mı diye kontrol et
-            return Ok();            
+            if (productService.IsProductExist(id))
+            {
+                if (ModelState.IsValid)
+                {
+                    productService.UpdateProduct(request);
+                    return Ok();
+                }
+                return BadRequest(ModelState);
+            }
+            return NotFound(new { message=$"{id} id'li bir ürün yok." });
         }
     }
 }
