@@ -16,6 +16,6 @@ namespace shop.API.Services
         void UpdateProduct(UpdateProductRequest product);
 
         bool IsProductExist(int id);
-
+        void Delete(int id);
     }
 }

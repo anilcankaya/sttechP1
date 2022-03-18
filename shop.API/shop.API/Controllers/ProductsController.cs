@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using shop.API.Dtos.Request;
+using shop.API.Filters;
 using shop.API.Models;
 using shop.API.Services;
 using System;
@@ -35,10 +37,11 @@ namespace shop.API.Controllers
         public IActionResult GetById(int id)
         {
             var product = productService.GetProductById(id);
-            
+
             return Ok(product);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult AddProduct(AddProductRequest request)
         {
             //var product = new Product
@@ -54,26 +57,42 @@ namespace shop.API.Controllers
             if (ModelState.IsValid)
             {
                 //var product = mapper.Map<Product>(request);
-               int lastId = productService.Add(request);
+                int lastId = productService.Add(request);
                 return CreatedAtAction(nameof(GetById), new { id = lastId }, null);
             }
-            return BadRequest(ModelState);          
+            return BadRequest(ModelState);
 
         }
         [HttpPut("{id}")]
+        [ItemExists]
         public IActionResult Update(int id, UpdateProductRequest request)
         {
             // TODO 1: Any ile ürün var mı diye kontrol et
-            if (productService.IsProductExist(id))
+            //if (productService.IsProductExist(id))
+            //{
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    productService.UpdateProduct(request);
-                    return Ok();
-                }
-                return BadRequest(ModelState);
+                productService.UpdateProduct(request);
+                return Ok();
             }
-            return NotFound(new { message=$"{id} id'li bir ürün yok." });
+            return BadRequest(ModelState);
+            //}
+            //return NotFound(new { message=$"{id} id'li bir ürün yok." });
         }
+
+
+        [HttpDelete("{id}")]
+        [ItemExists]
+        public IActionResult Delete(int id)
+        {
+            // if (productService.IsProductExist(id))
+            // {
+            productService.Delete(id);
+            return Ok();
+            //}
+
+            // return NotFound(new { message = $"{id} id'li bir ürün yok." });
+        }
+
     }
 }

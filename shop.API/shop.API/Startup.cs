@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +14,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace shop.API
 {
@@ -38,8 +41,52 @@ namespace shop.API
 
             services.AddScoped<IProductService, EFProductService>();
             services.AddDbContext<ShopdbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("db")));
+            services.AddScoped<IUserService, FakeUserService>();
+
+            /*
+             * farklı orijinler:
+             * http://dukkan.trendyol.com <-> http://www.trendyol.com 
+             * https://www.trendyol.com <-> http://www.trendyol.com 
+             * http://www.trendyol.com:2016 <-> http://www.trendyol.com 
+             * 
+             * Aynı:
+             *    * https://www.trendyol.com/urunler <> https://www.trendyol.com/kategoriler
+             * 
+             */
+
+            services.AddCors(option =>
+            {
+                option.AddPolicy("allow", config =>
+                {
+                    config.AllowAnyHeader();
+                    config.AllowAnyMethod();
+                    config.AllowAnyOrigin();
+                });
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //services.AddAuthentication("Basic").AddScheme<>
+
+            var auidience = Configuration.GetSection("TokenParam")["Audience"];
+            var issuer = Configuration.GetSection("TokenParam")["Issuer"];
+            var secret = Configuration.GetSection("TokenParam")["Secret"];
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(opt =>
+                    {
+                        opt.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateActor = true,
+                            ValidateAudience = true,
+                            ValidateIssuer = true,
+                            ValidAudience = auidience,
+                            ValidIssuer = issuer,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
+
+                        };
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +103,13 @@ namespace shop.API
 
             app.UseRouting();
 
+            app.UseCors("allow");
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+
 
             app.UseEndpoints(endpoints =>
             {

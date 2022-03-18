@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #urunler {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="urunGetir">Ürünleri Getir</button>
+    <ul id="urunler"></ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#urunGetir').on('click', function () {
+                $.ajax({
+                    headers: {
+                        'Authentication':'Basic '+btoa('turkay:123')
+                    },
+                    url: 'https://localhost:5001/api/Products',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+
+                        $.each(data, function (index, element) {
+                            let li = $('<li>' + element.name + ' ' + element.price + '</li>');
+                            $('#urunler').append(li);
+                        });
+                        $('#urunler').show('slow');
+                    }
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

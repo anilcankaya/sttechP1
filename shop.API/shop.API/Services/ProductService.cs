@@ -59,5 +59,12 @@ namespace shop.API.Services
         {
             return shopDbContext.Products.Any(p => p.Id == id);
         }
+
+        public void Delete(int id)
+        {
+            var product = shopDbContext.Products.FirstOrDefault(p => p.Id == id);
+            shopDbContext.Products.Remove(product);
+            shopDbContext.SaveChanges();
+        }
     }
 }
